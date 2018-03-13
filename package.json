@@ -1,0 +1,60 @@
+{
+  "name": "vue-payjp-checkout",
+  "version": "1.0.0",
+  "description": "PAY.JP Checkout component for Vue.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngs/vue-payjp-checkout.git"
+  },
+  "keywords": [
+    "vuejs",
+    "payment",
+    "pay.jp",
+    "component"
+  ],
+  "author": "Atsushi Nagase <a@ngs.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngs/vue-payjp-checkout/issues"
+  },
+  "homepage": "https://github.com/ngs/vue-payjp-checkout#readme",
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "@vue/test-utils": "^1.0.0-beta.12",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.1",
+    "typescript": "^2.7.2",
+    "vue-jest": "^2.1.1",
+    "vue-server-renderer": "^2.5.15",
+    "vue-template-compiler": "^2.5.15"
+  },
+  "dependencies": {
+    "vue": "^2.5.15"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ],
+    "modulePaths": [
+      "src"
+    ],
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true
+      }
+    },
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/node_modules/ts-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    }
+  }
+}
