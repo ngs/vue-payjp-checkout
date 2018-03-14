@@ -1,7 +1,9 @@
-import * as Vue from 'vue';
+import { CreateElement, VNode, VueConstructor } from 'vue';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-export default Vue.component('payjp-checkout', {
-  render(createElement) {
-    return createElement('div');
-  },
-});
+@Component
+export default class PayjpCheckout extends Vue {
+  render(createElement: CreateElement): VNode {
+    return createElement('div', {});
+  }
+};
