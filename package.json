@@ -29,12 +29,13 @@
     "jest": "^22.4.2",
     "ts-jest": "^22.4.1",
     "typescript": "^2.7.2",
+    "vue-class-component": "^6.2.0",
     "vue-jest": "^2.1.1",
-    "vue-property-decorator": "^6.0.0",
     "vue-server-renderer": "^2.5.15",
     "vue-template-compiler": "^2.5.15"
   },
   "dependencies": {
+    "vue-property-decorator": "^6.0.0",
     "vue": "^2.5.15"
   },
   "jest": {

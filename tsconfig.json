@@ -3,10 +3,20 @@
     "outDir": "./built/",
     "sourceMap": true,
     "strict": true,
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
-    "experimentalDecorators": true
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "isolatedModules": false,
+    "declaration": true,
+    "noImplicitAny": true,
+    "removeComments": false,
+    "strictNullChecks": true,
   },
   "include": [
     "./src/**/*"
