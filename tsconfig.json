@@ -6,10 +6,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": [
-      "dom",
-      "es2015"
-    ],
+    "lib": ["dom", "es2015"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "isolatedModules": false,
@@ -17,8 +14,8 @@
     "noImplicitAny": true,
     "removeComments": false,
     "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }

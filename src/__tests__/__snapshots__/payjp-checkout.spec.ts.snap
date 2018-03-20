@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PayjpCheckout renders hello 1`] = `"<div><script src=\\"https://checkout.pay.jp/\\" class=\\"payjp-button\\" data-on-created=\\"onCreatedPayjpToken_45cfff31a1607c000\\" data-on-failed=\\"onFailedPayjpToken_3befe4a56b4e64000\\" data-partial=\\"true\\"></script></div>"`;
+exports[`PayjpCheckout matches snapshot 1`] = `"<div><script src=\\"https://checkout.pay.jp/\\" class=\\"payjp-button\\" data-key=\\"asdfghjk\\" data-payjp=\\"1234\\" data-partial=\\"false\\" data-text=\\"pay!\\" data-submit-text=\\"&quot;submit!\\" data-token-name=\\"test token\\" data-previous-token=\\"foo\\" data-lang=\\"ja\\" data-on-created=\\"onCreatedPayjpToken_45cfff31a1607c000\\" data-on-failed=\\"onFailedPayjpToken_3befe4a56b4e64000\\" data-name-placeholder=\\"John Doe\\"></script></div>"`;
