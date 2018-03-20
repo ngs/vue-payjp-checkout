@@ -18,13 +18,17 @@ const CREATED = 'created',
 
 @Component
 export default class PayjpCheckout extends Vue {
+  static install(V: typeof Vue): void {
+    V.component('payjp-checkout', this);
+  }
+
   /** あなたのパブリックキー */
   @Prop({ required: true })
   apiKey!: string;
 
   /** PAY.JPで発行したOAuth Client ID */
   @Prop({})
-  clientID?: string;
+  clientId?: string;
 
   /** trueとセットすると、カード情報フォーム入力後に自動的に送信(自動的なトークン作成)しない */
   @Prop({ default: false })
@@ -54,10 +58,7 @@ export default class PayjpCheckout extends Vue {
   @Prop({})
   namePlaceholder?: string;
 
-  @Prop({})
   private createdCallbackName!: string;
-
-  @Prop({})
   private failedCallbackName!: string;
 
   render(createElement: CreateElement): VNode {
@@ -65,14 +66,16 @@ export default class PayjpCheckout extends Vue {
   }
 
   created() {
+    const self = this;
     const emit = this.$emit.bind(this);
     const assignCallback = (eventName: string, name: string) => {
       const w = window as any;
       w[name] = (...args: any[]) => {
-        emit(eventName, ...args);
+        const ret = emit(eventName, ...args);
         try {
           delete w[name];
         } finally {
+          return !!self.$el.getElementsByTagName('input')[0].form && ret;
         }
       };
     };
@@ -93,7 +96,7 @@ export default class PayjpCheckout extends Vue {
       src: 'https://checkout.pay.jp/',
       class: 'payjp-button',
       'data-key': this.apiKey,
-      'data-payjp': this.clientID,
+      'data-payjp': this.clientId,
       'data-partial': this.partial ? 'true' : 'false',
       'data-text': this.text,
       'data-submit-text': this.submitText,

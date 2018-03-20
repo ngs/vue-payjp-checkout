@@ -12,19 +12,21 @@ describe('PayjpCheckout', () => {
     _component = null;
     propsData = () => ({
       apiKey: 'asdfghjk',
-      clientID: '1234',
+      clientId: '1234',
       text: 'pay!',
       submitText: '"submit!',
       tokenName: 'test token',
       previousToken: 'foo',
-      namePlaceholder: 'John Doe',
-      createdCallbackName: 'onCreatedPayjpToken_45cfff31a1607c000',
-      failedCallbackName: 'onFailedPayjpToken_3befe4a56b4e64000'
+      namePlaceholder: 'John Doe'
     });
     component = () =>
       _component ||
       (_component = shallow(PayjpCheckout, {
-        propsData: propsData()
+        propsData: propsData(),
+        mocks: {
+          createdCallbackName: 'onCreatedPayjpToken_45cfff31a1607c000',
+          failedCallbackName: 'onFailedPayjpToken_3befe4a56b4e64000'
+        }
       }));
   });
 
