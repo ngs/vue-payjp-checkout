@@ -3,11 +3,13 @@ import PayjpCheckout from '../';
 
 describe('PayjpCheckout', () => {
   let propsData: () => object,
+    _component: any,
     component: () => Wrapper<PayjpCheckout>,
     global = window as any;
   beforeEach(() => {
     delete global.onCreatedPayjpToken_45cfff31a1607c000;
     delete global.onFailedPayjpToken_3befe4a56b4e64000;
+    _component = null;
     propsData = () => ({
       apiKey: 'asdfghjk',
       clientID: '1234',
@@ -20,9 +22,10 @@ describe('PayjpCheckout', () => {
       failedCallbackName: 'onFailedPayjpToken_3befe4a56b4e64000'
     });
     component = () =>
-      shallow(PayjpCheckout, {
+      _component ||
+      (_component = shallow(PayjpCheckout, {
         propsData: propsData()
-      });
+      }));
   });
 
   it('matches snapshot', () => {
@@ -43,5 +46,17 @@ describe('PayjpCheckout', () => {
     expect(global.onCreatedPayjpToken_45cfff31a1607c000).toBeUndefined();
     global.onFailedPayjpToken_3befe4a56b4e64000();
     expect(global.onFailedPayjpToken_3befe4a56b4e64000).toBeUndefined();
+  });
+
+  it('emits created event', () => {
+    expect(component().emitted('created')).toBe(undefined);
+    global.onCreatedPayjpToken_45cfff31a1607c000({ result: true });
+    expect(component().emitted('created')).toEqual([[{ result: true }]]);
+  });
+
+  it('emits failed event', () => {
+    expect(component().emitted('failed')).toBe(undefined);
+    global.onFailedPayjpToken_3befe4a56b4e64000({ result: false });
+    expect(component().emitted('failed')).toEqual([[{ result: false }]]);
   });
 });
