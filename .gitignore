@@ -3,3 +3,4 @@ node_modules
 built
 dist
 .cache
+vue-payjp-checkout-*.tgz

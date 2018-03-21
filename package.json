@@ -1,11 +1,14 @@
 {
   "name": "vue-payjp-checkout",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha",
   "description": "PAY.JP Checkout component for Vue.js",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "start": "parcel examples/index.html"
+    "start": "parcel examples/index.html",
+    "build": "tsc",
+    "prepack": "npm run clean && npm run build",
+    "clean": "rm -f vue-payjp-checkout-*.tgz && rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,11 @@
     "vue-server-renderer": "^2.5.15",
     "vue-template-compiler": "^2.5.15"
   },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map"
+  ],
   "dependencies": {
     "vue-property-decorator": "^6.0.0",
     "vue": "^2.5.15"
