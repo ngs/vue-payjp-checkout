@@ -1,6 +1,8 @@
 import Vue from 'vue/dist/vue.esm.js';
 import PayjpCheckout from '../src/index';
+
 Vue.use(PayjpCheckout);
+
 new Vue({
   el: '#app',
   data() {

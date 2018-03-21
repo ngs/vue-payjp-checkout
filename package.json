@@ -1,13 +1,15 @@
 {
   "name": "vue-payjp-checkout",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "PAY.JP Checkout component for Vue.js",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "scripts": {
     "test": "jest",
     "start": "parcel examples/index.html",
-    "build": "tsc",
+    "build": "npm run build:lib && npm run build:browser",
+    "build:lib": "tsc",
+    "build:browser": "parcel build src/vue-payjp-checkout.ts",
     "build:demo": "npm run clean && parcel build --public-url ./ examples/index.html",
     "codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "prepack": "npm run clean && npm run build",
@@ -47,7 +49,8 @@
   "files": [
     "dist/index.js",
     "dist/index.d.ts",
-    "dist/index.js.map"
+    "dist/index.js.map",
+    "dist/vue-payjp-checkout.js"
   ],
   "dependencies": {
     "vue-property-decorator": "^6.0.0",
