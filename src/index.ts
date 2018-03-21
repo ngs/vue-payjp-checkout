@@ -1,16 +1,6 @@
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-function generateCallbackName(prefix: string): string {
-  const rand = Math.ceil(Math.random() * 1e20).toString(0x10);
-  const name = prefix + rand;
-  const w = window as any;
-  if (w[name]) {
-    return generateCallbackName(prefix);
-  }
-  return name;
-}
-
 const CREATED = 'created',
   FAILED = 'failed',
   CREATED_CALLBACK_PREFIX = 'onCreatedPayjpToken_',
@@ -60,6 +50,7 @@ export default class PayjpCheckout extends Vue {
 
   private createdCallbackName!: string;
   private failedCallbackName!: string;
+  private random!: () => number;
 
   render(createElement: CreateElement): VNode {
     return createElement('div', {});
@@ -68,6 +59,18 @@ export default class PayjpCheckout extends Vue {
   created() {
     const self = this;
     const emit = this.$emit.bind(this);
+    const random = self.random || Math.random;
+
+    function generateCallbackName(prefix: string): string {
+      const rand = Math.ceil(random() * 1e20).toString(0x10);
+      const name = prefix + rand;
+      const w = window as any;
+      if (w[name]) {
+        return generateCallbackName(prefix);
+      }
+      return name;
+    }
+
     const assignCallback = (eventName: string, name: string) => {
       const w = window as any;
       w[name] = (...args: any[]) => {
@@ -76,7 +79,7 @@ export default class PayjpCheckout extends Vue {
           delete w[name];
         } finally {
           const inputs = self.$el.getElementsByTagName('input')[0] || {};
-          return !!inputs.form && ret;
+          return !!inputs.form && !!ret;
         }
       };
     };
@@ -98,7 +101,7 @@ export default class PayjpCheckout extends Vue {
       class: 'payjp-button',
       'data-key': this.apiKey,
       'data-payjp': this.clientId,
-      'data-partial': this.partial ? 'true' : 'false',
+      'data-partial': !!this.partial,
       'data-text': this.text,
       'data-submit-text': this.submitText,
       'data-token-name': this.tokenName,
