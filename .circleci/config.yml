@@ -20,3 +20,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm test
+      - run: 'if [[ $CIRCLE_BRANCH == "master" ]]; then; npm run build:demo && npm run deploy:demo; fi'
+

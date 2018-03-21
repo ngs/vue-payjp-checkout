@@ -7,6 +7,8 @@
     "test": "jest",
     "start": "parcel examples/index.html",
     "build": "tsc",
+    "build:demo": "npm run clean && parcel build --public-url ./ examples/index.html",
+    "deploy:demo": "rm -rf dist/.git; REPO_URL=$(git config remote.origin.url); git init dist; cd dist; git remote add origin $REPO_URL; mkdir .tmp; mv * .tmp/; git fetch origin gh-pages; git checkout gh-pages || git checkout -b gh-pages; rm -rf *; mv .tmp/* .; rmdir .tmp; git add -A; git commit -m '[ci skip] Update gh-pages'; git push origin gh-pages; cd -",
     "prepack": "npm run clean && npm run build",
     "clean": "rm -f vue-payjp-checkout-*.tgz && rm -rf dist"
   },
