@@ -48,31 +48,24 @@ export default class PayjpCheckout extends Vue {
   @Prop({})
   namePlaceholder?: string;
 
-  private createdCallbackName!: string;
-  private failedCallbackName!: string;
   private random!: () => number;
 
   render(createElement: CreateElement): VNode {
     return createElement('div', {});
   }
 
-  created() {
+  mounted() {
     const self = this;
     const emit = this.$emit.bind(this);
     const random = self.random || Math.random;
 
-    function generateCallbackName(prefix: string): string {
+    function generateCallback(eventName: string, prefix: string): string {
       const rand = Math.ceil(random() * 1e20).toString(0x10);
       const name = prefix + rand;
       const w = window as any;
       if (w[name]) {
-        return generateCallbackName(prefix);
+        return generateCallback(eventName, prefix);
       }
-      return name;
-    }
-
-    const assignCallback = (eventName: string, name: string) => {
-      const w = window as any;
       w[name] = (...args: any[]) => {
         const ret = emit(eventName, ...args);
         try {
@@ -82,18 +75,15 @@ export default class PayjpCheckout extends Vue {
           return !!inputs.form && !!ret;
         }
       };
-    };
-    if (!this.createdCallbackName) {
-      this.createdCallbackName = generateCallbackName(CREATED_CALLBACK_PREFIX);
+      return name;
     }
-    assignCallback(CREATED, this.createdCallbackName);
-    if (!this.failedCallbackName) {
-      this.failedCallbackName = generateCallbackName(FAILED_CALLBACK_PREFIX);
-    }
-    assignCallback(FAILED, this.failedCallbackName);
-  }
 
-  mounted() {
+    const createdCallbackName = generateCallback(
+      CREATED,
+      CREATED_CALLBACK_PREFIX
+    );
+    const failedCallbackName = generateCallback(FAILED, FAILED_CALLBACK_PREFIX);
+
     const scriptEl = document.createElement('script');
     // https://pay.jp/docs/checkout
     const attrs = {
@@ -107,8 +97,8 @@ export default class PayjpCheckout extends Vue {
       'data-token-name': this.tokenName,
       'data-previous-token': this.previousToken,
       'data-lang': this.lang,
-      'data-on-created': this.createdCallbackName,
-      'data-on-failed': this.failedCallbackName,
+      'data-on-created': createdCallbackName,
+      'data-on-failed': failedCallbackName,
       'data-name-placeholder': this.namePlaceholder
     } as any;
     Object.keys(attrs).forEach(key => {

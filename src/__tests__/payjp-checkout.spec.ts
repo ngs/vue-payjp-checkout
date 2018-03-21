@@ -22,7 +22,6 @@ describe('PayjpCheckout', () => {
       text: 'pay!',
       submitText: '"submit!',
       tokenName: 'test token',
-      previousToken: 'foo',
       namePlaceholder: 'John Doe'
     });
     component = () =>
