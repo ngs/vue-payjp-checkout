@@ -26,10 +26,14 @@ jobs:
       - run: npm install
       - <<: *save_cache
       - run: npm test
+      - run: npm run codacy
       - run: npm pack && mkdir pkg && mv *.tgz pkg
       - store_artifacts:
           path: pkg
           destination: pkg
+      - store_artifacts:
+          path: coverage
+          destination: coverage
 
   deploy:
     <<: *build_config

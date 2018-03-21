@@ -4,3 +4,4 @@ built
 dist
 .cache
 vue-payjp-checkout-*.tgz
+coverage

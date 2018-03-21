@@ -9,6 +9,7 @@
     "start": "parcel examples/index.html",
     "build": "tsc",
     "build:demo": "npm run clean && parcel build --public-url ./ examples/index.html",
+    "codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "prepack": "npm run clean && npm run build",
     "clean": "rm -f vue-payjp-checkout-*.tgz; rm -rf dist; true"
   },
@@ -32,9 +33,10 @@
     "@types/jest": "^22.2.0",
     "@vue/test-utils": "^1.0.0-beta.12",
     "babel-preset-env": "^1.6.1",
-    "parcel-plugin-vue": "ngs/parcel-plugin-vue#support-separation",
+    "codacy-coverage": "^2.1.1",
     "jest": "^22.4.2",
     "parcel-bundler": "^1.6.2",
+    "parcel-plugin-vue": "ngs/parcel-plugin-vue#support-separation",
     "ts-jest": "^22.4.1",
     "typescript": "^2.7.2",
     "vue-class-component": "^6.2.0",
@@ -53,6 +55,8 @@
   },
   "jest": {
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "collectCoverage": true,
+    "coverageReporters": ["json", "lcov", "text", "html"],
     "moduleFileExtensions": [
       "ts",
       "js",
