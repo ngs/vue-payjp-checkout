@@ -32,6 +32,8 @@ Vue.use(PayjpCheckout)
 </payjp-checkout>
 ```
 
+View [demo]
+
 Author
 ------
 
@@ -45,3 +47,4 @@ Copyright &copy; 2018 [Atushi Nagase]. All rights reserved.
 [Atushi Nagase]: https://ngs.io/
 [PAY.JP Checkout Button]: https://pay.jp/docs/checkout
 [Vue.js]: https://vuejs.org/
+[demo]: https://ngs.github.io/vue-payjp-checkout/
