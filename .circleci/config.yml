@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.9.4
 
     working_directory: ~/repo
 
@@ -20,5 +20,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm test
-      - run: 'if [[ $CIRCLE_BRANCH == "master" ]]; then; npm run build:demo && npm run deploy:demo; fi'
+      - run: 'if [[ $CIRCLE_BRANCH == "master" ]]; then npm run build:demo && .circleci/deploy-demo.sh; fi'
 
