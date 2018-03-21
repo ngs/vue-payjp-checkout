@@ -1,6 +1,6 @@
 {
   "name": "vue-payjp-checkout",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "PAY.JP Checkout component for Vue.js",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
@@ -59,7 +59,12 @@
   "jest": {
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
     "collectCoverage": true,
-    "coverageReporters": ["json", "lcov", "text", "html"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
     "moduleFileExtensions": [
       "ts",
       "js",
