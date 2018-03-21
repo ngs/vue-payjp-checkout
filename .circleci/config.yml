@@ -26,9 +26,10 @@ jobs:
       - run: npm install
       - <<: *save_cache
       - run: npm test
-      - run: npm pack
+      - run: npm pack && mkdir pkg && mv *.tgz pkg
       - store_artifacts:
-          path: vue-payjp-checkout-*.tgz
+          path: pkg
+          destination: pkg
 
   deploy:
     <<: *build_config
