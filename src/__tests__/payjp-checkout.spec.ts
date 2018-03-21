@@ -61,4 +61,27 @@ describe('PayjpCheckout', () => {
     global.onFailedPayjpToken_3befe4a56b4e64000({ result: false });
     expect(component().emitted('failed')).toEqual([[{ result: false }]]);
   });
+
+  describe('callback name', () => {
+    beforeEach(() => {
+      component = () =>
+        shallow(PayjpCheckout, {
+          propsData: propsData()
+        });
+    });
+    it('generates callback name randomly', () => {
+      const attrs1 = component()
+        .find('script')
+        .attributes();
+      const attrs2 = component()
+        .find('script')
+        .attributes();
+      expect(attrs1['data-on-created']).toMatch(
+        /^onCreatedPayjpToken_[0-9a-f]+$/
+      );
+      expect(attrs1['data-on-failed']).toMatch(/^onFailedPayjpToken_[0-9a-f]+/);
+      expect(attrs1['data-on-created']).not.toEqual(attrs2['data-on-created']);
+      expect(attrs1['data-on-failed']).not.toEqual(attrs2['data-on-failed']);
+    });
+  });
 });
