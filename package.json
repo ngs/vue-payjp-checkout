@@ -1,6 +1,6 @@
 {
   "name": "vue-payjp-checkout",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha.1",
   "description": "PAY.JP Checkout component for Vue.js",
   "main": "dist/index.js",
   "scripts": {

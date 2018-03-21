@@ -26,6 +26,9 @@ jobs:
       - run: npm install
       - <<: *save_cache
       - run: npm test
+      - run: npm pack
+      - store_artifacts:
+          path: vue-payjp-checkout-*.tgz
 
   deploy:
     <<: *build_config
@@ -38,11 +41,23 @@ jobs:
       - run: .circleci/set-git-identity.sh
       - run: .circleci/deploy-demo.sh
 
+  publish:
+    <<: *build_config
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - run: npm install
+      - <<: *save_cache
+      - run: npm run build
+      - run: 'echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc'
+      - run: npm publish
+
 workflows:
   version: 2
   test-and-deploy:
     jobs:
       - test
+
       - deploy:
           filters:
             branches:
@@ -50,3 +65,9 @@ workflows:
           requires:
             - test
 
+      - publish:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
