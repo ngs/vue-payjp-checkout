@@ -1,24 +1,52 @@
 version: 2
+
+references:
+  build_config: &build_config
+      docker:
+        - image: circleci/node:8.9.4
+      working_directory: ~/repo
+
+  restore_cache: &restore_cache
+    restore_cache:
+      keys:
+      - v1-dependencies-{{ checksum "package.json" }}
+
+  save_cache: &save_cache
+    save_cache:
+      paths:
+        - node_modules
+      key: v1-dependencies-{{ checksum "package.json" }}
+
 jobs:
-  build:
-    docker:
-      - image: circleci/node:8.9.4
-
-    working_directory: ~/repo
-
+  test:
+    <<: *build_config
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-
+      - <<: *restore_cache
       - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
+      - <<: *save_cache
       - run: npm test
-      - run: 'if [[ $CIRCLE_BRANCH == "master" ]]; then npm run build:demo && .circleci/deploy-demo.sh; fi'
+
+  deploy:
+    <<: *build_config
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - run: npm install
+      - <<: *save_cache
+      - run: npm run build:demo
+      - run: .circleci/set-git-identity.sh
+      - run: .circleci/deploy-demo.sh
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
 
