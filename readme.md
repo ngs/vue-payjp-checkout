@@ -3,6 +3,10 @@ vue-payjp-checkout
 
 [PAY.JP Checkout Button] component for [Vue.js]
 
+[![npm version](https://badge.fury.io/js/vue-payjp-checkout.svg)](https://badge.fury.io/js/vue-payjp-checkout)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/75340aa1653c433090a8ba96972176c2)](https://www.codacy.com/app/ngs/vue-payjp-checkout?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngs/vue-payjp-checkout&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/ngs/vue-payjp-checkout.svg?style=svg)](https://circleci.com/gh/ngs/vue-payjp-checkout)
+
 How to use
 ----------
 
