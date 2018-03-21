@@ -75,7 +75,8 @@ export default class PayjpCheckout extends Vue {
         try {
           delete w[name];
         } finally {
-          return !!self.$el.getElementsByTagName('input')[0].form && ret;
+          const inputs = self.$el.getElementsByTagName('input')[0] || {};
+          return !!inputs.form && ret;
         }
       };
     };
